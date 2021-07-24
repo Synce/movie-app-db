@@ -1,7 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import MovieDataSlice from './MovieDataSlice';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    movieData: MovieDataSlice,
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;

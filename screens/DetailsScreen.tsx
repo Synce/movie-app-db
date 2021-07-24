@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-const DetailsScreen = () => {
+const DetailsScreen = (): JSX.Element => {
   return (
     <View>
       <Text />
