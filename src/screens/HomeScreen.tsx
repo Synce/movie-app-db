@@ -1,12 +1,7 @@
-import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
-
 import { Image, Button, Text, Center } from 'native-base';
-import { StackParamList } from '../App';
-
-import image from '../assets/welcomeImage.jpg';
-
-type ProfileScreenNavigationProp = StackNavigationProp<StackParamList>;
+import image from '../../assets/welcomeImage.jpg';
+import { ProfileScreenNavigationProp } from '../app/interfaces';
 
 interface IHomeScreen {
   navigation: ProfileScreenNavigationProp;

@@ -3,10 +3,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { extendTheme, NativeBaseProvider } from 'native-base';
 import React from 'react';
 import { Provider } from 'react-redux';
-import DetailsScreen from './screens/DetailsScreen';
-import HomeScreen from './screens/HomeScreen';
-import SearchScreen from './screens/SearchScreen';
-import { store } from './store';
+import { store } from './src/app/store';
+import DetailsScreen from './src/screens/DetailsScreen';
+import HomeScreen from './src/screens/HomeScreen';
+import SearchScreen from './src/screens/SearchScreen';
 
 const theme = extendTheme({
   colors: {
@@ -35,7 +35,7 @@ const theme = extendTheme({
 export type StackParamList = {
   Home: undefined;
   Search: undefined;
-  Details: undefined;
+  Details: { movieID: number; name: string };
 };
 
 const Stack = createStackNavigator();

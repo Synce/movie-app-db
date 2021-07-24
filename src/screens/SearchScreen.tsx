@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   Button,
   HStack,
@@ -12,33 +12,38 @@ import {
 import { BackHandler, ListRenderItem } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
-import SearchBar from './components/SearchBar';
-import { useAppDispatch, useAppSelector, useCustomBackAction } from '../hooks';
+import SearchBar from '../components/SearchBar';
+
+import MovieCard from '../components/MovieCard';
+
+import Loader from '../components/Loader';
+import Chip from '../components/Chip';
+import FilterMenu from '../components/FilterMenu';
+import Switch from '../components/Switch';
+import { ProfileScreenNavigationProp, IMovie } from '../app/interfaces';
 import {
-  changeCurrentSearch,
-  fetchSearchData,
-  fetchGenres,
-  selectCurrentSearch,
+  useAppSelector,
+  useAppDispatch,
+  useCustomBackAction,
+} from '../app/hooks';
+import {
   selectMovies,
   selectStatus,
+  selectCurrentSearch,
   selectGenres,
   selectFilteredGenres,
+  fetchGenres,
+  changeCurrentSearch,
+  fetchSearchData,
   removeGenre,
-} from '../MovieDataSlice';
-import MovieCard from './components/MovieCard';
-import { IMovie } from '../interfaces';
+} from '../app/MovieDataSlice';
+import { filterMoviesByGenre } from '../app/tools';
 
-import Loader from './components/Loader';
-import Chip from './components/Chip';
-import FilterMenu from './components/FilterMenu';
-import Switch from './components/Switch';
-import { filterMoviesByGenre } from '../tools';
+interface ISearchScreen {
+  navigation: ProfileScreenNavigationProp;
+}
 
-const renderMovieCard: ListRenderItem<IMovie> = ({ item }) => (
-  <MovieCard {...item} />
-);
-
-const SearchScreen = (): JSX.Element => {
+const SearchScreen = ({ navigation }: ISearchScreen): JSX.Element => {
   const movies = useAppSelector(selectMovies);
   const status = useAppSelector(selectStatus);
   const recentSearch = useAppSelector(selectCurrentSearch);
@@ -50,6 +55,11 @@ const SearchScreen = (): JSX.Element => {
   const [filtersOpen, setFiltersOpen] = useState<boolean>(false);
   const [genresAND, setGenresAND] = useState<boolean>(false);
 
+  const filteredMovies = useMemo(
+    () => filterMoviesByGenre(movies, genresAND, filteredGenres),
+    [movies, genresAND, filteredGenres],
+  );
+
   useEffect(() => {
     dispatch(fetchGenres());
   }, [dispatch]);
@@ -58,6 +68,15 @@ const SearchScreen = (): JSX.Element => {
     BackHandler.exitApp();
     return true;
   });
+
+  const renderMovieCard: ListRenderItem<IMovie> = ({ item }) => (
+    <MovieCard
+      {...item}
+      onPress={() => {
+        navigation.navigate('Details', { movieID: item.id, name: item.title });
+      }}
+    />
+  );
 
   return (
     <VStack flex={1}>
@@ -130,7 +149,7 @@ const SearchScreen = (): JSX.Element => {
         <FlatList
           p={5}
           flex={1}
-          data={filterMoviesByGenre(movies, genresAND, filteredGenres)}
+          data={filteredMovies}
           renderItem={renderMovieCard}
           keyExtractor={(item: IMovie) => `${item.id}`}
         />

@@ -1,7 +1,7 @@
 import { Spinner, Text } from 'native-base';
 import React from 'react';
 
-import { Status } from '../../enums';
+import { Status } from '../app/enums';
 
 interface ILoader {
   status: Status;

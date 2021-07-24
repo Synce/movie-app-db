@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { FlatList, Text, Pressable, VStack, Box } from 'native-base';
 import { ListRenderItem } from 'react-native';
-import { IGenre } from '../../interfaces';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import {
-  addGenre,
-  selectFilteredGenres,
-  selectGenres,
-} from '../../MovieDataSlice';
+
 import SearchBar from './SearchBar';
+import { useAppSelector, useAppDispatch } from '../app/hooks';
+import { IGenre } from '../app/interfaces';
+import {
+  selectGenres,
+  selectFilteredGenres,
+  addGenre,
+} from '../app/MovieDataSlice';
 
 const FilterMenu = (): JSX.Element => {
   const [genreSearch, setGenreSearch] = useState<string>('');

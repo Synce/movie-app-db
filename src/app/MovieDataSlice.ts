@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import token from '../../token';
 import { Status } from './enums';
 import { IGenre, IMovie } from './interfaces';
 import { RootState } from './store';
-import token from './token';
 
 interface IMovieDataSlice {
   status: Status;
@@ -26,26 +26,19 @@ export const fetchSearchData = createAsyncThunk(
   async (_, { getState }) => {
     const state = getState() as RootState;
     if (state.movieData.currentSearch === '') return [];
-    try {
-      const result = await axios.get(
-        `https://api.themoviedb.org/3/search/movie?api_key=${token}&query=${state.movieData.currentSearch}`,
-      );
 
-      return result.data.results;
-    } catch (err) {
-      throw new Error(err);
-    }
+    const result = await axios.get(
+      `https://api.themoviedb.org/3/search/movie?api_key=${token}&query=${state.movieData.currentSearch}`,
+    );
+
+    return result.data.results;
   },
 );
 export const fetchGenres = createAsyncThunk('Genres/fetch', async () => {
-  try {
-    const result = await axios.get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${token}`,
-    );
-    return result.data.genres;
-  } catch (err) {
-    throw new Error(err);
-  }
+  const result = await axios.get(
+    `https://api.themoviedb.org/3/genre/movie/list?api_key=${token}`,
+  );
+  return result.data.genres;
 });
 
 export const MovieDataSlice = createSlice({
