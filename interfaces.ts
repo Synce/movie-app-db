@@ -15,3 +15,8 @@ export interface IMovie {
   video: boolean;
   vote_average: number;
 }
+
+export interface IGenre {
+  id: number;
+  name: string;
+}

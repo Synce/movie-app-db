@@ -5,13 +5,18 @@ interface IChip {
   value: string;
   close?: boolean;
   onClose?: () => void;
-  icon?: JSX.Element;
 }
-const Chip = ({ value, close, onClose, icon }: IChip): JSX.Element => {
+const Chip = ({ value, close, onClose }: IChip): JSX.Element => {
   return (
-    <HStack borderWidth={2} borderColor="primary">
-      {icon}
-      <Text>{value}</Text>
+    <HStack
+      alignItems="center"
+      borderWidth={2}
+      px={2}
+      space={3}
+      rounded={20}
+      borderColor="primary"
+    >
+      <Text justifyContent="center">{value}</Text>
       {close && (
         <Pressable onPress={onClose}>
           <SmallCloseIcon />
