@@ -22,17 +22,18 @@ const SearchBar = ({
 }: ISearchBar): JSX.Element => {
   return (
     <Input
-      variant="filled"
-      bg="white.100"
-      borderRadius={10}
-      color="secondary.50"
+      variant="unstyled"
+      bg="primary.200"
+      borderRadius={20}
+      color="secondary.100"
       h={10}
       w="100%"
       py={1}
       px={2}
-      borderColor="secondary.50"
+      borderColor="secondary.100"
+      borderWidth={2}
       placeholder={placeholder}
-      InputLeftElement={<SearchIcon color="secondary.50" size="sm" />}
+      InputLeftElement={<SearchIcon ml={2} color="secondary.100" size="sm" />}
       value={value}
       onChangeText={onChageText}
       onEndEditing={onEndEditing}

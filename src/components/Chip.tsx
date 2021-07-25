@@ -1,5 +1,7 @@
 import React from 'react';
-import { SmallCloseIcon, Text, HStack, Pressable } from 'native-base';
+import { Text, HStack, Pressable } from 'native-base';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 interface IChip {
   value: string;
@@ -10,16 +12,19 @@ const Chip = ({ value, close, onClose }: IChip): JSX.Element => {
   return (
     <HStack
       alignItems="center"
-      borderWidth={2}
       px={2}
+      py={1}
       space={3}
       rounded={20}
-      borderColor="primary"
+      bg="primary.200"
+      shadow={2}
     >
-      <Text justifyContent="center">{value}</Text>
+      <Text color="tertiary.100" textAlign="center">
+        {value}
+      </Text>
       {close && (
         <Pressable onPress={onClose}>
-          <SmallCloseIcon />
+          <FontAwesomeIcon style={{ color: '#06D6A0' }} icon={faTimesCircle} />
         </Pressable>
       )}
     </HStack>

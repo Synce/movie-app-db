@@ -19,6 +19,16 @@ export interface IMovie {
   vote_average: number;
 }
 
+export interface ISerchResponse {
+  page: number;
+  results: IMovie[];
+  total_results: number;
+  total_pages: number;
+}
+export interface ISerchResponseWithQueryAndYear extends ISerchResponse {
+  query: string;
+  year: number;
+}
 export interface IGenre {
   id: number;
   name: string;

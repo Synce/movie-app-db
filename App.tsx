@@ -1,36 +1,16 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { extendTheme, NativeBaseProvider } from 'native-base';
+import { NativeBaseProvider } from 'native-base';
 import React from 'react';
+import { LogBox } from 'react-native';
 import { Provider } from 'react-redux';
 import { store } from './src/app/store';
 import DetailsScreen from './src/screens/DetailsScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import SearchScreen from './src/screens/SearchScreen';
+import theme from './theme';
 
-const theme = extendTheme({
-  colors: {
-    primary: {
-      50: '#88cca5',
-      100: '#70C294',
-    },
-    secondary: {
-      50: '#032541',
-      100: '#03213A',
-      150: '#021627',
-    },
-    white: {
-      50: '#f5f7ff',
-      100: '#EBEFFF',
-    },
-    error: {
-      50: '#E71D36',
-    },
-  },
-  config: {
-    initialColorMode: 'white',
-  },
-});
+LogBox.ignoreAllLogs(true);
 
 export type StackParamList = {
   Home: undefined;
@@ -44,7 +24,18 @@ const App = (): JSX.Element => {
     <Provider store={store}>
       <NativeBaseProvider theme={theme}>
         <NavigationContainer>
-          <Stack.Navigator>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: '#071422',
+              },
+              headerTitleStyle: {
+                color: '#01B4E4',
+              },
+              headerTitleAlign: 'center',
+              headerTintColor: '#01B4E4',
+            }}
+          >
             <Stack.Screen
               name="Home"
               component={HomeScreen}
@@ -54,13 +45,6 @@ const App = (): JSX.Element => {
               name="Search"
               component={SearchScreen}
               options={{
-                headerStyle: {
-                  backgroundColor: '#f5f7ff',
-                },
-                headerTitleStyle: {
-                  color: '#032541',
-                },
-                headerTitleAlign: 'center',
                 title: 'Search for movies',
                 headerLeft: () => null,
               }}

@@ -60,6 +60,5 @@ export const selectDetails =
     state.detailsData.cachedDetails.filter(({ id }) => movieId === id)[0];
 export const selectStatus = (state: RootState): Status =>
   state.detailsData.status;
-// export const {} = DetailsDataSlice.actions;
 
 export default DetailsDataSlice.reducer;

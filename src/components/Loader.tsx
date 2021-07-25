@@ -8,6 +8,7 @@ interface ILoader {
   children: JSX.Element;
   errorMasage: string;
   loading: string;
+  enable?: boolean;
 }
 
 const Loader = ({
@@ -15,17 +16,18 @@ const Loader = ({
   children,
   loading,
   errorMasage,
+  enable = true,
 }: ILoader): JSX.Element => {
   const result =
     status === Status.LOADING ? (
-      <Spinner color="primary.50" accessibilityLabel={loading} />
+      <Spinner color="white.50" accessibilityLabel={loading} />
     ) : (
       <Text color="error.50" fontSize="xl">
         {errorMasage}
       </Text>
     );
 
-  return status === Status.SUCCESS ? children : result;
+  return status === Status.SUCCESS || !enable ? children : result;
 };
 
 export default Loader;

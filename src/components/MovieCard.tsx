@@ -14,6 +14,7 @@ import {
   Text,
   Icon,
   Pressable,
+  Center,
 } from 'native-base';
 import React from 'react';
 import { IMovie } from '../app/interfaces';
@@ -29,7 +30,7 @@ const MovieCard = ({
 }: IMovie & { onPress: () => void }): JSX.Element => {
   return (
     <Box
-      bg="secondary.50"
+      bg="primary.200"
       shadow={2}
       rounded="lg"
       w="100%"
@@ -46,40 +47,47 @@ const MovieCard = ({
             />
           </AspectRatio>
           <VStack flex={1} p={2} space={2}>
-            <Heading fontSize={15} textAlign="center" color="primary.50">
+            <Heading fontSize={18} textAlign="center" color="secondary.100">
               {title}
             </Heading>
-            <Text fontSize={10} color="primary.50" noOfLines={4}>
+            <Text fontSize={10} color="tertiary.100" noOfLines={4}>
               {overview}
             </Text>
-            <HStack>
-              <Text>
-                <FontAwesomeIcon style={{ color: '#f5f7ff' }} icon={faFire} />
+            <HStack flex={1} py={3} justifyContent="center" space={5}>
+              <Text color="secondary.100">
+                <FontAwesomeIcon style={{ color: '#01B4E4' }} icon={faFire} />{' '}
                 {popularity}
               </Text>
-              <Text>
-                <FontAwesomeIcon style={{ color: '#f5f7ff' }} icon={faStar} />
-                {vote_average} <Text> ({vote_count})</Text>
+              <Text color="secondary.100">
+                <FontAwesomeIcon style={{ color: '#01B4E4' }} icon={faStar} />{' '}
+                {vote_average}{' '}
+                <Text fontSize={10} color="rgba(1,180,228,0.5)">
+                  ({vote_count})
+                </Text>
               </Text>
             </HStack>
-            <HStack
-              flex={1}
-              alignItems="center"
-              justifyContent="center"
-              space={2}
-            >
-              <Icon
-                size="2xl"
-                as={
-                  <FontAwesomeIcon
-                    style={{ color: '#f5f7ff' }}
-                    icon={faChevronCircleRight}
-                  />
-                }
-              />
+            <Center flex={1}>
+              <HStack
+                justifyContent="center"
+                alignItems="center"
+                space={2}
+                paddingBottom={4}
+              >
+                <Icon
+                  size="2xl"
+                  as={
+                    <FontAwesomeIcon
+                      style={{ color: '#f5f7ff' }}
+                      icon={faChevronCircleRight}
+                    />
+                  }
+                />
 
-              <Text fontSize={20}>Read More</Text>
-            </HStack>
+                <Text color="white.50" fontSize={15}>
+                  Read More
+                </Text>
+              </HStack>
+            </Center>
           </VStack>
         </HStack>
       </Pressable>
