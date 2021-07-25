@@ -10,8 +10,6 @@ import HomeScreen from './src/screens/HomeScreen';
 import SearchScreen from './src/screens/SearchScreen';
 import theme from './theme';
 
-LogBox.ignoreAllLogs(true);
-
 export type StackParamList = {
   Home: undefined;
   Search: undefined;
